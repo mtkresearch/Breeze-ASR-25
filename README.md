@@ -1,6 +1,6 @@
 # Breeze ASR 25
 
-<img src="https://huggingface.co/MediaTek-Research/Twister/resolve/main/breezeASR25.png" alt="Breeze ASR 25" width="700"/>
+<img src="https://huggingface.co/MediaTek-Research/Twister/resolve/main/BreezeASR25.png" alt="Breeze ASR 25" width="700"/>
 
 
 **Breeze ASR 25** 是一款基於 Whisper-large-v2 開發的語音辨識模型，並具有以下特色：
