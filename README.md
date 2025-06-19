@@ -1,2 +1,138 @@
-# Breeze-ASR-25
-Breeze ASR 25 is an advanced ASR model fine-tuned from Whisper-large-v2, optimized for Taiwanese Mandarin and Mandarin-English code-switching scenariosn and code-swt
+# Breeze ASR 25
+
+<img src="https://huggingface.co/MediaTek-Research/Twister/resolve/main/breezeasrpipe.png" alt="Breeze ASR 25" width="700"/>
+
+
+**Breeze ASR 25** 是一款基於 Whisper-large-v2 開發的語音辨識模型，並具有以下特色：
+
+- 強化繁體中文語境辨識能力
+- 採用單一混和語言向量解碼，強化中英交錯情境語境辨識能力，包含句內以及句外轉換
+- 強化時間戳記對齊，適合自動字幕生成
+
+**Breeze ASR 25** is an advanced ASR model fine-tuned from [Whisper-large-v2](https://github.com/openai/whisper) 
+
+
+- Optimized for Taiwanese Mandarin
+- Adopted an unified mix embedding for decoding, optimized for Mandarin-English code-switching scenarios, including intra-sentential switching and inter-sentential switching.
+- Enhanced time alignment, suitable for automatic captioning
+
+---
+## Example:
+
+增強範例-中英混用情境： [MediaTek's 24th Anniversary](https://www.youtube.com/watch?v=YkUv5qyhVhw&t=261s)
+
+Breeze ASR 25:
+
+```
+面對不知道的我們怎麼用 open mind open heart 的心情去 explore
+那 explore 過程也就是持續學習 不斷創新
+當然如果能帶領 MediaTek 說達到這樣的 position
+對做這樣的事情那覺得是一個 commitment
+那也是一個 passion 那可以一直很努力的投入在做
+```
+
+Whisper-large-v2:
+
+```
+面對不知道的我們怎麼用開放心情去探索
+把它探索過程也就是 仔細學習 不斷創新
+當然如果能帶領MediaTek說 達到這樣的層次 對做這樣的事情
+那覺得是一個貢獻那也是一個熱誠
+那可以一直來努力地投入在做
+```
+
+---
+
+## Performance
+The WERR is reported in comparison with the Whisper-large-v2 automatic language detection (WLV2-Auto) baseline. "Breeze ASR 25" is refered in the [paper](https://arxiv.org/pdf/2506.11130) as "Twister"
+### Short-form Audio Datasets
+
+| Dataset\Model             | Language | WLV2-Auto ↓ | WLV3-Auto ↓ | COOL-Whisper ↓ | **Breeze ASR 25 (Ours)** ↓ |
+|---------------------------|---------------|-------------|-------------|----------------|------------------|
+| ASCEND-OVERALL*           | Mixed | 21.14       | 23.22       | 19.71          | **17.74** (-16.08%) |
+| - ASCEND-EN               | English    | 27.36       | 27.21       | 29.39          | **26.64** (-2.63%)  |
+| - ASCEND-ZH               | Mandarin | 17.49       | 17.41       | 18.90          | **16.04** (-8.29%)     |
+| - ASCEND-MIX*             | Mixed  | 21.01       | 25.13       | 17.34          | **16.38** (-22.01%) |
+| CommonVoice16-zh-TW       | Mandarin     | 9.84        | 8.95        | 11.86          | **7.97** (-19%)     |
+| CSZS-zh-en*               | Mixed  | 29.49       | 26.43       | 20.90          | **13.01** (-55.88%) |
+
+### Long-form Audio Datasets
+
+| Dataset\Model             | Language | WLV2-Auto ↓ | WLV3-Auto ↓ | COOL-Whisper ↓ | **Breeze ASR 25 (Ours)** ↓ |
+|---------------------------|---------------|-------------|-------------|----------------|------------------|
+| ML-lecture-2021-long*     | Mandarin     | 6.13        | 6.41        | 6.37           | **4.98** (-18.76%) |
+| Formosa-Go                | Mandarin    | 15.03       | 14.90       | 16.83          | **13.61** (-9.44%) |
+| Formosa-Show              | Mandarin   | 29.18       | 27.80       | 29.78          | **27.58** (-5.48%) |
+| Formosa-Course            | Mandarin | **9.50**       | 9.67        | 11.12          | 9.94 (+0.44%)      |
+| Formosa-General           | Mandarin    | 11.45       | 11.46       | 13.33          | **11.37** (-0.69%) |
+| FormosaSpeech             | Mandarin   | 22.34       | 21.22       | 26.71          | **22.09** (-1.12%) |
+
+\* Code-switching datasets
+
+---
+
+## Training Data
+
+所有 Twister 的的訓練取樣自**寬鬆自由軟體授權條款**的數據集，中文部分完全採用合成語音資料：
+
+The training data of Twister is sampled from the following publicly available sources with **permissive open-source licenses**, where all Chinese data are synthetic:
+
+
+| Dataset Name                                                                 | Type   | Language        | Total Hours | License |
+|------------------------------------------------------------------------------|--------|-----------------|-------------|---------|
+| ODC Synth                                                                    | Synthetic | Mandarin        | 10,000      | Open Data Commons License Attribution + Apache2.0* |
+| [CommonVoice17-EN](https://huggingface.co/datasets/mozilla-foundation/common_voice_17_0) | Real   | English         | 1,738       | Creative Commons Zero |
+| [NTUML2021](https://huggingface.co/datasets/ky552/ML2021_ASR_ST)              | Real   | Code-switching  | 11          | MIT License |
+
+
+*ODC Synth is generated by using text from [FineWeb2](https://huggingface.co/datasets/HuggingFaceFW/fineweb-2) (ODC License) and a TTS model [BreezyVoice](https://huggingface.co/MediaTek-Research/BreezyVoice) (Apache2.0 License)
+
+Additional code-switching samples are generated through data augmentation with these three datasets; further details can be found in our [paper](https://arxiv.org/pdf/2506.11130).
+
+---
+
+## 🔧 Usage Example
+
+The whisper architecture is supported in Hugging Face 🤗 Transformers.
+
+First, install relavant packages:
+
+```
+pip install --upgrade pip
+pip install --upgrade transformers datasets[audio] accelerate
+```
+
+It is advised to run the model with `pipeline`, which supports arbitrary length.
+Sequential model (`chunk_length_s=0`) yields best results.
+
+```python
+python run.py --file_name=FILE_NAME
+```
+
+---
+
+## Acknowledgements
+
+We thank NVIDIA for providing access to the Taipei-1 supercomputer. 
+
+We thank Professor Hung-yi Lee for his valuable guidance on this project.
+
+---
+
+## 📜 Citation
+
+If you find this model useful, please cite our work:
+
+**Cheng-Kang Chou\***, **Chan-Jan Hsu\***, Ho-Lam Chung, Liang-Hsuan Tseng, Hsi-Chun Cheng, Yu-Kuan Fu, Kuan-Po Huang, Hung-yi Lee  
+[*A Self-Refining Framework for Enhancing ASR Using TTS-Synthesized Data*](https://arxiv.org/pdf/2506.11130)
+
+\*Equal contribution 
+
+```bibtex
+@article{chou2025selfrefiningframeworkenhancingasr,
+  title={A Self-Refining Framework for Enhancing ASR Using TTS-Synthesized Data},
+  author={Cheng Kang Chou and Chan-Jan Hsu and Ho-Lam Chung and Liang-Hsuan Tseng and Hsi-Chun Cheng and Yu-Kuan Fu and Kuan Po Huang and Hung-Yi Lee},
+  journal={arXiv preprint arXiv:2506.11130},
+  year={2025}
+}
+```
