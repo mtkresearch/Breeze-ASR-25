@@ -44,7 +44,7 @@ Whisper-large-v2:
 ---
 
 ## Performance
-The WERR is reported in comparison with the Whisper-large-v2 automatic language detection (WLV2-Auto) baseline. "Breeze ASR 25" is refered in the [paper](https://arxiv.org/pdf/2506.11130) as "Twister"
+Word error rates of benchmarks. The WERR is reported in comparison with the Whisper-large-v2 automatic language detection (WLV2-Auto) baseline. "Breeze ASR 25" is refered in the [paper](https://arxiv.org/pdf/2506.11130) as "Twister"
 ### Short-form Audio Datasets
 
 | Dataset\Model             | Language | WLV2-Auto ↓ | WLV3-Auto ↓ | COOL-Whisper ↓ | **Breeze ASR 25 (Ours)** ↓ |
