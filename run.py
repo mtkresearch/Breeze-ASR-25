@@ -12,14 +12,14 @@ def transcribe_audio(file_name):
         waveform = waveform.mean(dim=0)                         
     waveform = waveform.squeeze().numpy()                        
 
-    if sample_rate != 16_000:
-        resampler = torchaudio.transforms.Resample(sample_rate, 16_000)
+    if sample_rate != 16000:
+        resampler = torchaudio.transforms.Resample(sample_rate, 16000)
         waveform = resampler(torch.tensor(waveform)).numpy()
-        sample_rate = 16_000
+        sample_rate = 16000
 
     # 3. Load Model
-    processor = WhisperProcessor.from_pretrained("MediaTek-Research/Twister")
-    model = WhisperForConditionalGeneration.from_pretrained("MediaTek-Research/Twister").to("cuda").eval()
+    processor = WhisperProcessor.from_pretrained("MediaTek-Research/Breeze-ASR-25")
+    model = WhisperForConditionalGeneration.from_pretrained("MediaTek-Research/Breeze-ASR-25").to("cuda").eval()
 
     # 4. Build Pipeline
     asr_pipeline = AutomaticSpeechRecognitionPipeline(
