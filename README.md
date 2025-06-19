@@ -103,7 +103,7 @@ pip install --upgrade transformers datasets[audio] accelerate
 ```
 
 It is advised to run the model with `pipeline`, which supports arbitrary length.
-Sequential model (`chunk_length_s=0`) yields best results.
+Sequential modeling (`chunk_length_s=0`) yields best results.
 
 ```python
 python run.py --file_name=FILE_NAME
