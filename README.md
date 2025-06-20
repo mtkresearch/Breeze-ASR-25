@@ -121,7 +121,7 @@ pip install third_party/whisper-patch-breeze
 
 Then, run on bash
 ```bash
-whisper {INPUT_FILE} --model breeze-asr-25 
+whisper {FILE_NAME} --model breeze-asr-25 
 ```
 
 Please refer to the (Whisper GitHub)[https://github.com/openai/whisper?tab=readme-ov-file#command-line-usage] for further options.
