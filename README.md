@@ -49,12 +49,12 @@ Word error rates of benchmarks. The WERR is reported in comparison with the Whis
 
 | Dataset\Model             | Language | WLV2-Auto ↓ | WLV3-Auto ↓ | COOL-Whisper ↓ | **Breeze ASR 25 (Ours)** ↓ |
 |---------------------------|---------------|-------------|-------------|----------------|------------------|
-| ASCEND-OVERALL*           | Mixed | 21.14       | 23.22       | 19.71          | **17.74** (-16.08%) |
+| ASCEND-OVERALL*           | Code-switching | 21.14       | 23.22       | 19.71          | **17.74** (-16.08%) |
 | - ASCEND-EN               | English    | 27.36       | 27.21       | 29.39          | **26.64** (-2.63%)  |
 | - ASCEND-ZH               | Mandarin | 17.49       | 17.41       | 18.90          | **16.04** (-8.29%)     |
-| - ASCEND-MIX*             | Mixed  | 21.01       | 25.13       | 17.34          | **16.38** (-22.01%) |
+| - ASCEND-MIX*             | Code-switching  | 21.01       | 25.13       | 17.34          | **16.38** (-22.01%) |
 | CommonVoice16-zh-TW       | Mandarin     | 9.84        | 8.95        | 11.86          | **7.97** (-19%)     |
-| CSZS-zh-en*               | Mixed  | 29.49       | 26.43       | 20.90          | **13.01** (-55.88%) |
+| CSZS-zh-en*               | Code-switching  | 29.49       | 26.43       | 20.90          | **13.01** (-55.88%) |
 
 ### Long-form Audio Datasets
 
@@ -102,12 +102,30 @@ pip install --upgrade pip
 pip install --upgrade transformers datasets[audio] accelerate
 ```
 
-It is advised to run the model with `pipeline`, which supports arbitrary length.
+When running with huggingface, it is advised to run the model with `pipeline`, which supports arbitrary length.
 Sequential modeling (`chunk_length_s=0`) yields best results.
 
 ```python
 python run.py --file_name=FILE_NAME
 ```
+
+字幕檔生成，請參考以下whisper指令
+
+You can also use `whisper` command to generate subtitles
+
+First, install relavant packages:
+```
+git submodule update --init --recursive
+pip install third_party/whisper-patch-breeze
+```
+
+Then, run on bash
+```bash
+whisper {INPUT_FILE} --model breeze-asr-25 
+```
+
+Please refer to the (Whisper GitHub)[https://github.com/openai/whisper?tab=readme-ov-file#command-line-usage] for further options.
+
 
 ---
 
