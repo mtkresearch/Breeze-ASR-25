@@ -1,0 +1,3 @@
+[submodule "third_party/whisper-patch-breeze"]
+	path = third_party/whisper-patch-breeze
+	url = https://github.com/Splend1d/whisper-patch-breeze.git
