@@ -108,10 +108,11 @@ Sequential modeling (`chunk_length_s=0`) yields best results.
 ```python
 python run.py --file_name=FILE_NAME
 ```
+---
 
-字幕檔生成，請參考以下whisper指令
+字幕檔生成，請參考以下 `whisper` 指令
 
-You can also use `whisper` command to generate subtitles
+You can also use the `whisper` cli interface to generate subtitles
 
 First, install relavant packages:
 ```
