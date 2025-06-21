@@ -106,7 +106,7 @@ When running with huggingface, it is advised to run the model with `pipeline`, w
 Sequential modeling (`chunk_length_s=0`) yields best results.
 
 ```python
-python run.py --file_name=FILE_NAME
+python run.py --file_name=AUDIO_FILE_NAME
 ```
 ---
 
@@ -122,7 +122,7 @@ pip install third_party/whisper-patch-breeze
 
 Then, run on bash
 ```bash
-whisper {FILE_NAME} --model breeze-asr-25 
+whisper {AUDIO_FILE_NAME} --model breeze-asr-25 
 ```
 
 Please refer to the [Whisper GitHub](https://github.com/openai/whisper?tab=readme-ov-file#command-line-usage) for further options.
